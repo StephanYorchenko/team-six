@@ -74,8 +74,6 @@ class RoomsRepository:
         self.database = database
 
     async def get_by_id(self, team_id: str) -> Optional[RoomDTO]:
-        # query = rooms.select().where(teams.c.id == team_id)
-        # return await self.database.fetch_one(query)
         return RoomDTO(
             name="Палата №6",
             id=int(team_id)
