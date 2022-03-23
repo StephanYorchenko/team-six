@@ -127,3 +127,29 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# python cache
+*.pyc
+*__pycache__/
+*ipynb_checkpoints/
+
+# JetBrains IDE
+.idea/
+
+# database
+db.sqlite3
+
+# logging
+logs/
+
+# user images
+mediafiles/
+
+# static
+staticfiles/
+
+# trash
+.DS_Store
+
+# local env
+settings/.env

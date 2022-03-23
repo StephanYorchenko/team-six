@@ -1,5 +1,7 @@
 # Pull base image
-FROM python:3.7.12-alpine3.14
+FROM python:3.9-alpine3.14
+
+RUN apk --update add gcc make g++ zlib-dev
 
 # Set environment varibles
 ENV PYTHONDONTWRITEBYTECODE 1
