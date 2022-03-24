@@ -15,7 +15,7 @@ resources:
 
 variables:
   # Container registry service connection established during pipeline creation
-  dockerRegistryServiceConnection: 'd80d3bb7-94fb-41d3-96e3-0a5a21de2b13'
+  dockerRegistryServiceConnection: 'MyDockerRegistry'
   imageRepository: 'stephanyorchenkoteamsixbackend'
   containerRegistry: 'teamsixcontainers.azurecr.io'
   dockerfilePath: '$(Build.SourcesDirectory)/Dockerfile'
@@ -52,4 +52,4 @@ stages:
         inputs:
           azureSubscription: $(azureSubscription)
           appName: $(appName)
-          containers: $(containerRegistry)/$(imageRepository):$(tag)
+          containers: $(containerRegistry)/$(imageRepository)
