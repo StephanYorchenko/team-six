@@ -1,5 +1,5 @@
-from infrastructure.repositories.users.repository import PostgresUsersRepository
+from infrastructure.repositories.payments.repository import PostgresUsersRepository
 
 
-def get_user_repository():
-    return PostgresUsersRepository()
+def get_payments_repository():
+    return PostgresPaymentsRepository()

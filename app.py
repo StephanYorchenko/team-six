@@ -2,7 +2,7 @@ from fastapi import APIRouter, FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from infrastructure.database.db import db
-from infrastructure.views.other import other_routes
+from infrastructure.views.payments import other_routes
 
 tags_metadata = [
     {'name': 'OpenAPI', 'description': 'System <–> ППУ'},
