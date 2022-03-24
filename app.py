@@ -1,11 +1,18 @@
-from fastapi import FastAPI
+from fastapi import APIRouter, FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 # from infrastructure.database.db import db
-from infrastructure.views.main import user_route
+from infrastructure.views.other import other_routes
+
+tags_metadata = [
+    {'name': 'OpenAPI', 'description': 'System <–> ППУ'},
+    {'name': 'Main', 'description': 'СППУ <–> System'},
+    {'name': 'Other', 'description': 'Something else'},
+]
 
 app = FastAPI(
-    title='OpenAPI web app for payment initiations from CRM'
+    title='OpenAPI web app for payment initiations from CRM',
+    openapi_tags=tags_metadata,
 )
 
 
@@ -21,6 +28,8 @@ async def shutdown():
     # await db.disconnect()
 
 
+# middleware
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=['*'],
@@ -29,4 +38,9 @@ app.add_middleware(
     allow_headers=['*'],
 )
 
-app.include_router(user_route)
+# routes
+
+api = APIRouter(prefix='/api')
+api.include_router(other_routes)
+
+app.include_router(api)

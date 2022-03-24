@@ -1,9 +1,9 @@
 from fastapi import Security
-from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
+from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
 
 security = HTTPBearer()
 
 
 async def get_user_from_token(credentials: HTTPAuthorizationCredentials = Security(security)):
-    # здесь нужна валидация токена
+    # TODO: валидация токена
     return credentials.credentials
