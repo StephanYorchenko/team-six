@@ -10,12 +10,15 @@ ENV PYTHONUNBUFFERED 1
 WORKDIR /code/
 
 # Install dependencies
-RUN pip install pipenv
+RUN pip install pipenv uvicorn
 COPY Pipfile Pipfile.lock /code/
 RUN pipenv install --system --dev
 
+COPY ./start.sh /start.sh
+RUN chmod +x /start.sh
+
 COPY . /code/
 
-#CMD ["uvicorn app:app --host 0.0.0.0 --port 8000 --reload"]
+CMD ["./start.sh"]
 
-EXPOSE 8000
+#EXPOSE 8000
