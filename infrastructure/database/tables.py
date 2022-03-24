@@ -1,18 +1,33 @@
-from sqlalchemy import CheckConstraint, Column, Integer, PrimaryKeyConstraint, String, Table
+from sqlalchemy import CheckConstraint, Column, PrimaryKeyConstraint, String, Boolean, Table, ForeignKey
 
 from infrastructure.database.db import metadata
 
-_user_id = 'users.id'
+_crms_id = 'crms.id'
 
-users = Table(
-    'users',
+crms = Table(
+    'crms',
     metadata,
-    Column('id', Integer, primary_key=True, autoincrement=True),
-    Column('login', String, unique=True, nullable=False),
-    Column('first_name', String, default=''),
-    Column('second_name', String, default=''),
-    Column('last_name', String, default=''),
+    Column('id', String, primary_key=True),
 )
+
+
+access_tokens = Table(
+    'access_tokens',
+    metadata,
+    Column('crms_id', ForeignKey(_crms_id, ondelete='CASCADE'), nullable=False),
+    Column('access_token', String, nullable=True),
+    Column('validate', Boolean, default=False),
+)
+
+
+hybrid_tokens = Table(
+    'hybrid_tokens',
+    metadata,
+    Column('crms_id', ForeignKey(_crms_id, ondelete='CASCADE'), nullable=False),
+    Column('access_token', String, nullable=True),
+    Column('refresh_token', String, nullable=True),
+)
+
 
 trash = Table(
     'spatial_ref_sys',
