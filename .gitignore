@@ -150,6 +150,3 @@ staticfiles/
 
 # trash
 .DS_Store
-
-# local env
-settings/.env
