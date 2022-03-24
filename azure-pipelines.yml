@@ -22,7 +22,7 @@ variables:
   tag: '$(Build.BuildId)'
 
   # Deploy variables
-  azureSubscription: 'Azure for Students'
+  azureSubscription: 'DockerServiceConnection'
   appName: 'team-six'
 
   # Agent VM image name
