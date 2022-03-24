@@ -5,9 +5,6 @@ class AccessTokenDTO(BaseModel):
     token: str
 
 
-class HybridAccessTokenDTO(BaseModel):
-    token: str
-
-
-class HybridRefreshToken(BaseModel):
-    token: str
+class HybridTokenDTO(BaseModel):
+    access_token: str
+    refresh_token: str
