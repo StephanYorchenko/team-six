@@ -1,12 +1,9 @@
-import os
-
 import sqlalchemy
-from dotenv import load_dotenv
+from databases import Database
 
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-load_dotenv(os.path.join(BASE_DIR, '.env'))
+from settings import *
 
-# db = Database(os.environ['DATABASE_URL'])
-# db = Database('postgresql://postgres:postgres@0.0.0.0:5432/test_db')
+DATABASE_URL = f'postgresql://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}'
+db = Database(DATABASE_URL)
 
 metadata = sqlalchemy.MetaData()

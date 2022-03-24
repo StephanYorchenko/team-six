@@ -1,7 +1,7 @@
 from fastapi import APIRouter, FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-# from infrastructure.database.db import db
+from infrastructure.database.db import db
 from infrastructure.views.other import other_routes
 
 tags_metadata = [
@@ -19,13 +19,13 @@ app = FastAPI(
 @app.on_event('startup')
 async def startup():
     print('hello')
-    # await db.connect()
+    await db.connect()
 
 
 @app.on_event('shutdown')
 async def shutdown():
     print('buy')
-    # await db.disconnect()
+    await db.disconnect()
 
 
 # middleware

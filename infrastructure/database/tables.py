@@ -1,9 +1,8 @@
-from sqlalchemy import Column, Integer, String, Table
+from sqlalchemy import CheckConstraint, Column, Integer, PrimaryKeyConstraint, String, Table
 
 from infrastructure.database.db import metadata
 
 _user_id = 'users.id'
-# _room_id = "rooms.id"
 
 users = Table(
     'users',
@@ -14,6 +13,22 @@ users = Table(
     Column('second_name', String, default=''),
     Column('last_name', String, default=''),
 )
+
+trash = Table(
+    'spatial_ref_sys',
+    metadata,
+    Column('srid', Integer, autoincrement=False, nullable=False),
+    Column('auth_name', String(length=256), autoincrement=False, nullable=True),
+    Column('auth_srid', Integer, autoincrement=False, nullable=True),
+    Column('srtext', String(length=2048), autoincrement=False, nullable=True),
+    Column('proj4text', String(length=2048), autoincrement=False, nullable=True),
+    CheckConstraint('(srid > 0) AND (srid <= 998999)', name='spatial_ref_sys_srid_check'),
+    PrimaryKeyConstraint('srid', name='spatial_ref_sys_pkey')
+)
+
+# examples
+
+# _room_id = "rooms.id"
 
 # users_rooms = Table(
 #     "users_rooms",

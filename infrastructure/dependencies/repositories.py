@@ -1,4 +1,3 @@
-# from infrastructure.database.db import db
 from infrastructure.repositories.users.repository import PostgresUsersRepository
 
 
