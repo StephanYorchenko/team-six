@@ -1,4 +1,4 @@
-from sqlalchemy import CheckConstraint, Column, PrimaryKeyConstraint, String, Boolean, Table, ForeignKey
+from sqlalchemy import CheckConstraint, Column, ForeignKey, Integer, String, Boolean, DateTime, Table
 
 from infrastructure.database.db import metadata
 
@@ -26,6 +26,18 @@ hybrid_tokens = Table(
     Column('crms_id', ForeignKey(_crms_id, ondelete='CASCADE'), nullable=False),
     Column('access_token', String, nullable=True),
     Column('refresh_token', String, nullable=True),
+)
+
+
+payments = Table(
+    'payments',
+    metadata,
+    Column('crms_id', ForeignKey(_crms_id, ondelete='CASCADE'), nullable=False),
+    Column('title', String(length=256), nullable=False),
+    Column('description', String(length=2048), nullable=True),
+    Column('amount', Integer, nullable=False),
+    Column('reciever', String(length=256), nullable=False),
+    Column('created_at', DateTime(timezone=True), nullable=False)
 )
 
 
