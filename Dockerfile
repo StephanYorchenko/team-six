@@ -15,7 +15,7 @@ COPY Pipfile Pipfile.lock /code/
 RUN pipenv install --system --dev
 
 COPY ./start.sh /start.sh
-RUN chmod +x /start.sh
+RUN chmod a+x /start.sh
 
 COPY . /code/
 
