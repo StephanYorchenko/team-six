@@ -1,5 +1,5 @@
 # Pull base image
-FROM python:3.9-alpine3.14
+FROM python:3.8-alpine3.14
 
 RUN apk --update add gcc make g++ zlib-dev
 
@@ -10,7 +10,7 @@ ENV PYTHONUNBUFFERED 1
 WORKDIR /code/
 
 # Install dependencies
-RUN pip install pipenv uvicorn
+RUN pip install pipenv
 COPY Pipfile Pipfile.lock /code/
 RUN pipenv install --system --dev
 
