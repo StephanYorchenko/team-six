@@ -25,9 +25,3 @@ class PostgresPaymentsRepository(IPaymentRepository):
             raise Exception()
         return Payment(**result)
 
-
-class SandboxAPIPaymentRepository():
-    def __init__(self):
-        pass
-
-    async def create_payment_consent(self, url: data: Payment, ):
