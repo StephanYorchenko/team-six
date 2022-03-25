@@ -36,8 +36,21 @@ payments = Table(
     Column('title', String(length=256), nullable=False),
     Column('description', String(length=2048), nullable=True),
     Column('amount', Float, nullable=False),
-    Column('receiver', String(length=256), nullable=False),
-    Column('created_at', DateTime(timezone=True), nullable=False)
+    Column('partner_id', ForeignKey("partners.id", ondelete='CASCADE'), nullable=False),
+    Column('created_at', String, nullable=False),
+    Column("processed", Boolean, default=False)
+)
+
+
+
+partners = Table(
+    'partners',
+    metadata,
+    Column('id', String, primary_key=True),
+    Column('full_name', String, nullable=False),
+    Column('tax_code', String, nullable=True),
+    Column('kpp', String, nullable=False),
+    Column('logo_url', String, nullable=False),
 )
 
 trash = Table(

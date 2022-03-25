@@ -1,20 +1,22 @@
 from typing import Optional
 
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 
-class PaymentInputDTO(BaseModel):
-    crm_id: int
-
-
-class PaymentOutputDTO(BaseModel):
+class Payment(BaseModel):
+    identifier: Optional[str]
     title: str
     description: Optional[str]
-    created_at: str
+    created_at: str = Field(..., alias="createdAt")
     amount: float
-    logo_url: Optional[str]
     processed: bool = False
 
+    partnerId: str
 
-class Payment(PaymentOutputDTO):
-    ...
+
+class Partner(BaseModel):
+    identifier: Optional[str]
+    fullName: Optional[str]
+    logoUrl: Optional[str]
+    taxCode: Optional[str]
+    kpp: Optional[str]

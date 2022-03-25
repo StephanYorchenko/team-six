@@ -1,12 +1,10 @@
-# from typing import List
-
 import json
 from base64 import b64encode
+from typing import Dict
 
 import requests
 from fastapi import APIRouter
 
-# from core.payments.domain.models import PaymentInputDTO, PaymentOutputDTO
 from settings import *
 
 openapi_routes = APIRouter(prefix='/openapi', tags=['OpenAPI'])
@@ -65,8 +63,8 @@ def make_consent(access_token: str, amount: float) -> dict:
     }
 
     resp = requests.post(url, headers=headers, data=payload, verify=False)
-    decoded_data = resp.text.encode().decode('utf-8-sig')
-    return json.loads(decoded_data)
+    decoded_data = json.loads(resp.text.encode().decode('utf-8-sig'))
+    return decoded_data
 
 
 def exchange_code(code: str) -> Dict:
@@ -134,4 +132,10 @@ def make_payment(access_token: str) -> Dict:
 async def get_consent(amount: float):
     access_token = get_access_token()
     consent = make_consent(access_token, amount)
-    return consent
+    authorize_data = {
+        'AS_AUTH_URL': AS_AUTH_URL,
+        'CLIENT_ID': CLIENT_ID,
+        'REDIRECT_URI': REDIRECT_URI,
+        'CONSENT_ID': consent['Data']['consentId']
+    }
+    return authorize_data
