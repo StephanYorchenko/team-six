@@ -7,10 +7,10 @@ from core.payments.domain.models import PaymentInputDTO, PaymentOutputDTO
 from infrastructure.dependencies.auth import get_user_from_token
 from infrastructure.dependencies.repositories import get_payments_repository
 
-payment_routes = APIRouter(prefix='/payments')
+payment_routes = APIRouter(prefix='/payments', tags=['Payments'])
 
 
-@payment_routes.get('/crm/{crm_id}/get_all', response_model=List[PaymentOutputDTO], tags=['Payments'])
+@payment_routes.get('/crm/{crm_id}/get_all', response_model=List[PaymentOutputDTO])
 async def get_all_payments(
         crm_id: int,
         payments_repository=Depends(get_payments_repository),
