@@ -19,3 +19,4 @@ DB_PORT = 5432
 CLIENT_ID = os.getenv('CLIENT_ID')
 CLIENT_SECRET = os.getenv('CLIENT_SECRET')
 AS_URL = os.getenv('AS_URL')
+RS_PS_URL = os.getenv('RS_PS_URL')
