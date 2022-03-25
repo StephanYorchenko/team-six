@@ -1,5 +1,6 @@
-from sqlalchemy import Boolean, CheckConstraint, Column, DateTime, Float, ForeignKey, Integer, PrimaryKeyConstraint, \
-    String, Table
+from sqlalchemy import CheckConstraint, Column, PrimaryKeyConstraint, String, Boolean, Table, ForeignKey, Integer, \
+    DateTime, Float
+
 
 from infrastructure.database.db import metadata
 

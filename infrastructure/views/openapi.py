@@ -69,6 +69,21 @@ def make_consent(access_token: str, amount: float) -> dict:
     return decoded_data
 
 
+def exchange_code(code: str) -> Dict:
+    url = f'{AS_URL}/connect/token'
+
+    payload_start = 'client_id=08220583b8e7486e9870f4d74a1edc01&client_secret=FFJmGNsntYQ546crpQ9hWiCEIztSbojs&grant_type=authorization_code&code='
+    payload_end = '&redirect_uri=https%3A%2F%2Flocalhost.ru%2Fcb'
+    payload = payload_start + code + payload_end
+
+    headers = {
+        'Content-Type': 'application/x-www-form-urlencoded'
+    }
+
+    response = requests.request("POST", url, headers=headers, data=payload)
+    return response.json()
+
+
 @openapi_routes.get('/get_consent')
 async def get_consent(amount: float):
     access_token = get_access_token()
