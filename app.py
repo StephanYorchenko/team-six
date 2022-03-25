@@ -2,29 +2,36 @@ from fastapi import APIRouter, FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from infrastructure.database.db import db
-from infrastructure.views.payments import other_routes
+from infrastructure.views.payments import payment_routes
 
 tags_metadata = [
-    {'name': 'OpenAPI', 'description': 'System <–> ППУ'},
+    {'name': 'Authorization', 'description': 'System <–> OpenAPI <–> ППУ'},
+    {'name': 'Payments', 'description': 'System <–> OpenAPI <–> ППУ'},
     {'name': 'Main', 'description': 'СППУ <–> System'},
-    {'name': 'Other', 'description': 'Something else'},
 ]
 
 app = FastAPI(
-    title='OpenAPI web app for payment initiations from CRM',
+    title='Payment initiations',
+    description='OpenAPI web app for payment initiations from CRM',
+    docs_url='/swagger',
     openapi_tags=tags_metadata,
 )
 
 
+@app.get('/')
+def index():
+    return {'welcome_message': 'Hello from server!'}
+
+
+# events
+
 @app.on_event('startup')
 async def startup():
-    print('hello')
     await db.connect()
 
 
 @app.on_event('shutdown')
 async def shutdown():
-    print('buy')
     await db.disconnect()
 
 
@@ -41,6 +48,6 @@ app.add_middleware(
 # routes
 
 api = APIRouter(prefix='/api')
-api.include_router(other_routes)
+api.include_router(payment_routes)
 
 app.include_router(api)

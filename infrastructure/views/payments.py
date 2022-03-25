@@ -1,20 +1,20 @@
 from typing import List
 
-from fastapi import APIRouter, Body, Depends
+from fastapi import APIRouter, Depends
 
+from core.payments.application.use_cases.get_payments_by_crm_id import GetAllPayments
+from core.payments.domain.models import PaymentInputDTO, PaymentOutputDTO
 from infrastructure.dependencies.auth import get_user_from_token
-from infrastructure.dependencies.repositories import get_user_repository
+from infrastructure.dependencies.repositories import get_payments_repository
 
-other_routes = APIRouter()
+payment_routes = APIRouter(prefix='/payments')
 
 
-@other_routes.get('/crm/{:crm_id}/payment', response_model=List[PaymentOutputDTO], tags=['Payments'])
-async def get_current_user(
-        input_dto: PaymentInputDTO = Body(...),
-        user=Depends(get_user_from_token),
-        payments_repository=Depends(get_payments_repository)
+@payment_routes.get('/crm/{crm_id}/get_all', response_model=List[PaymentOutputDTO], tags=['Payments'])
+async def get_all_payments(
+        crm_id: int,
+        payments_repository=Depends(get_payments_repository),
+        _=Depends(get_user_from_token),
 ):
-    if not user:
-        raise Exception()
-    use_case = GetPaymentsByUser(payments_repository=payments_repository)
-    return await use_case.execute(input_dto=input_dto)
+    use_case = GetAllPayments(payments_repository=payments_repository)
+    return await use_case.execute(input_dto=PaymentInputDTO(crm_id=crm_id))

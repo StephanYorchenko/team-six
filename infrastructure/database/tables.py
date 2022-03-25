@@ -1,9 +1,6 @@
-<<<<<<< HEAD
-from sqlalchemy import CheckConstraint, Column, ForeignKey, Integer, String, Boolean, DateTime, Table
-=======
 from sqlalchemy import CheckConstraint, Column, PrimaryKeyConstraint, String, Boolean, Table, ForeignKey, Integer, \
     DateTime, Float
->>>>>>> e6ece55573fdcb692f0adb4e4f0cc37fd853430c
+
 
 from infrastructure.database.db import metadata
 
@@ -15,7 +12,6 @@ crm = Table(
     Column('id', String, primary_key=True),
 )
 
-
 access_tokens = Table(
     'access_tokens',
     metadata,
@@ -23,7 +19,6 @@ access_tokens = Table(
     Column('access_token', String, nullable=True),
     Column('validate', Boolean, default=False),
 )
-
 
 hybrid_tokens = Table(
     'hybrid_tokens',
@@ -36,27 +31,14 @@ hybrid_tokens = Table(
 payments = Table(
     'payments',
     metadata,
-    Column("identifier", String, primary_key=True),
+    Column('id', String, primary_key=True),
     Column('crm_id', ForeignKey(_crm_id, ondelete='CASCADE'), nullable=False),
     Column('title', String(length=256), nullable=False),
     Column('description', String(length=2048), nullable=True),
     Column('amount', Float, nullable=False),
-    Column('reciever', String(length=256), nullable=False),
+    Column('receiver', String(length=256), nullable=False),
     Column('created_at', DateTime(timezone=True), nullable=False)
 )
-
-
-payments = Table(
-    'payments',
-    metadata,
-    Column('crms_id', ForeignKey(_crms_id, ondelete='CASCADE'), nullable=False),
-    Column('title', String(length=256), nullable=False),
-    Column('description', String(length=2048), nullable=True),
-    Column('amount', Integer, nullable=False),
-    Column('reciever', String(length=256), nullable=False),
-    Column('created_at', DateTime(timezone=True), nullable=False)
-)
-
 
 trash = Table(
     'spatial_ref_sys',
