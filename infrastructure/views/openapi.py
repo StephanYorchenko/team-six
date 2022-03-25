@@ -1,12 +1,10 @@
-# from typing import List
-
 import json
 from base64 import b64encode
+from typing import Dict
 
 import requests
 from fastapi import APIRouter
 
-# from core.payments.domain.models import PaymentInputDTO, PaymentOutputDTO
 from settings import *
 
 openapi_routes = APIRouter(prefix='/openapi', tags=['OpenAPI'])
