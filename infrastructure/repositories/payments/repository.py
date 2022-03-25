@@ -17,7 +17,7 @@ class PostgresPaymentsRepository(IPaymentRepository):
         return [Payment(
             **payment,
             partnerId=payment.get("partner_id"),
-        ) for payment in result]
+        ) for payment in result][::-1]
 
     async def get_by_identifier(self, identifier: str) -> List[Payment]:
         query = payments.select().where(payments.c.id == str(identifier))
