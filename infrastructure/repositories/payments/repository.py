@@ -1,4 +1,5 @@
 from typing import List
+from requests import get, post
 
 from core.payments.application.repository import IPaymentRepository
 from infrastructure.database.tables import payments
@@ -23,3 +24,10 @@ class PostgresPaymentsRepository(IPaymentRepository):
         if not result:
             raise Exception()
         return Payment(**result)
+
+
+class SandboxAPIPaymentRepository():
+    def __init__(self):
+        pass
+
+    async def create_payment_consent(self, url: data: Payment, ):
