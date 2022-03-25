@@ -1,5 +1,5 @@
 # Pull base image
-FROM python:3.9-alpine3.14
+FROM python:3.8-alpine3.14
 
 RUN apk --update add gcc make g++ zlib-dev
 
