@@ -65,12 +65,18 @@ def make_consent(access_token: str, amount: float) -> dict:
     }
 
     resp = requests.post(url, headers=headers, data=payload, verify=False)
-    decoded_data = resp.text.encode().decode('utf-8-sig')
-    return json.loads(decoded_data)
+    decoded_data = json.loads(resp.text.encode().decode('utf-8-sig'))
+    return decoded_data
 
 
 @openapi_routes.get('/get_consent')
 async def get_consent(amount: float):
     access_token = get_access_token()
     consent = make_consent(access_token, amount)
-    return consent
+    authorize_data = {
+        'AS_AUTH_URL': AS_AUTH_URL,
+        'CLIENT_ID': CLIENT_ID,
+        'REDIRECT_URI': REDIRECT_URI,
+        'CONSENT_ID': consent['Data']['consentId']
+    }
+    return authorize_data
