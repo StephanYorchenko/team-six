@@ -3,12 +3,12 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from infrastructure.database.db import db
 from infrastructure.views.partners import partner_routes
+from infrastructure.views.openapi import openapi_routes
 from infrastructure.views.payments import payment_routes
 
 tags_metadata = [
-    {'name': 'Authorization', 'description': 'System <–> OpenAPI <–> ППУ'},
-    {'name': 'Payments', 'description': 'System <–> OpenAPI <–> ППУ'},
-    {'name': 'Main', 'description': 'СППУ <–> System'},
+    {'name': 'OpenAPI', 'description': 'System <–> OpenAPI <–> ППУ'},
+    {'name': 'Payments', 'description': 'СППУ <–> System'},
 ]
 
 app = FastAPI(
@@ -50,3 +50,4 @@ app.add_middleware(
 
 app.include_router(payment_routes)
 app.include_router(partner_routes)
+app.include_router(openapi_routes)

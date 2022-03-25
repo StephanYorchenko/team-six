@@ -16,6 +16,8 @@ uvicorn = {extras = ["standard"], version = "*"}
 python-dotenv = "*"
 databases = {extras = ["postgresql"], version = "*"}
 asyncpg = "*"
+requests = "*"
+
 
 [requires]
 python_version = "3.8"
