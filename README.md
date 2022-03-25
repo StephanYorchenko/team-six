@@ -52,7 +52,7 @@
 
 Просмотр спецификаций:
 
-- Swagger UI ```/docs```
+- Swagger UI ```/swagger```
 - Документация ```/redoc```
 
 Разработано team-six
