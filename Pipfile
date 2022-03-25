@@ -16,10 +16,11 @@ uvicorn = {extras = ["standard"], version = "*"}
 python-dotenv = "*"
 databases = {extras = ["postgresql"], version = "*"}
 asyncpg = "*"
-pydentic = "*"
+requests = "*"
+
 
 [requires]
-python_version = "3.9"
+python_version = "3.8"
 
 [pipenv]
 allow_prereleases = true

@@ -2,6 +2,7 @@ from fastapi import APIRouter, FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from infrastructure.database.db import db
+from infrastructure.views.authorization import authorization_routes
 from infrastructure.views.payments import payment_routes
 
 tags_metadata = [
@@ -49,5 +50,6 @@ app.add_middleware(
 
 api = APIRouter(prefix='/api')
 api.include_router(payment_routes)
+api.include_router(authorization_routes)
 
 app.include_router(api)
